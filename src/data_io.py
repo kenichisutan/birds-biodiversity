@@ -1,61 +1,14 @@
-"""
-Data loading and cleaning for Birds Biodiversity project.
-
-Note: This dataset has weird formatting issues - counts stored as datetime,
-messy column names, whitespace everywhere. This module handles all that.
-"""
-
 import pandas as pd
 import numpy as np
 from pathlib import Path
 
-def extract_count_from_datetime(dt_series):
-    """
-    Extract actual count from datetime-encoded columns.
-    
-    Yeah, the Excel file stores counts as datetime. The count is in the 
-    nanosecond component. So 1970-01-01 00:00:00.000000005 = 5 birds.
-    """
-    if pd.api.types.is_datetime64_any_dtype(dt_series):
-        # get the nanosecond part
-        counts = (dt_series.astype(np.int64) % 1000000000)
-        return counts.astype(float)
-    
-    # If it's already numeric, coerce safely to numeric floats
-    if pd.api.types.is_numeric_dtype(dt_series):
-        return pd.to_numeric(dt_series, errors='coerce').astype(float)
-
-    # For object or string dtypes, attempt two strategies:
-    # 1) Parse as datetime (to extract encoded counts)
-    dt_parsed = pd.to_datetime(dt_series, errors='coerce', infer_datetime_format=True)
-    if dt_parsed.notna().any():
-        result = pd.Series(np.nan, index=dt_series.index, dtype=float)
-        mask = dt_parsed.notna()
-        # extract ns only for valid datetimes
-        ns = (dt_parsed[mask].astype(np.int64) % 1000000000).astype(float)
-        result.loc[mask] = ns
-        return result
-
-    # 2) Fallback: coerce to numeric (strings like '5', blanks, etc.)
-    numeric = pd.to_numeric(dt_series, errors='coerce')
-    return numeric.astype(float)
-
 def load_excel_data(filepath):
-    """
-    Load all three sheets from the Excel file.
-    
-    Handles the non-standard formatting:
-    - ESPECES: bad headers, need manual column names
-    - GPS-MILIEU: datetime-encoded GPS coords
-    - NOM FRANÇAIS: messy column names, counts split by detection method
-    """
     filepath = Path(filepath)
     
     if not filepath.exists():
         raise FileNotFoundError(f"Can't find data file: {filepath}")
     
-    print(f"Loading data from {filepath}...")
-    print("This might take 30-60 seconds...")
+    print(f"Loading data from {filepath}")
     
     # Load ESPECES sheet - skip bad headers, manually name columns
     df_species = pd.read_excel(filepath, sheet_name='ESPECES', header=None, skiprows=1)
@@ -67,7 +20,7 @@ def load_excel_data(filepath):
         if df_species[col].dtype == 'object':
             df_species[col] = df_species[col].str.strip()
     
-    print(f"✓ Loaded {len(df_species)} species")
+    print(f"Loaded {len(df_species)} species")
     
     # Load GPS-MILIEU sheet
     df_gps = pd.read_excel(filepath, sheet_name='GPS-MILIEU', header=None, skiprows=1)
@@ -80,7 +33,7 @@ def load_excel_data(filepath):
         if df_gps[col].dtype == 'object':
             df_gps[col] = df_gps[col].str.strip()
     
-    print(f"✓ Loaded {len(df_gps)} GPS points")
+    print(f"Loaded {len(df_gps)} GPS points")
     
     # Load main observations sheet
     df_obs = pd.read_excel(filepath, sheet_name='NOM FRANÇAIS')
@@ -110,7 +63,7 @@ def load_excel_data(filepath):
     df_obs = df_obs.rename(columns=column_mapping)
     
     # convert the count columns to numeric (they're mixed type with headers in row 1)
-    print("Converting count columns to numeric...")
+    print("Converting count columns to numeric")
     count_cols = ['count_auditory', 'count_visual_no_flight', 
                   'count_audio_visual_no_flight', 'count_audio_visual_flight']
     
@@ -129,7 +82,7 @@ def load_excel_data(filepath):
         if col in df_obs.columns:
             df_obs[col] = df_obs[col].astype(str).str.strip()
     
-    print(f"✓ Loaded {len(df_obs)} observation records")
+    print(f"Loaded {len(df_obs)} observation records")
     
     return {
         'observations': df_obs,
@@ -138,18 +91,10 @@ def load_excel_data(filepath):
     }
 
 def clean_observations(df):
-    """
-    Clean and validate observations.
-    
-    Handles:
-    - Negative wind values (data errors)
-    - Zero/missing counts
-    - Missing essential fields
-    - Creates observation IDs
-    """
+    # Clean and validate observations.
     df_clean = df.copy()
     
-    print("\n=== Data Cleaning ===")
+    print("Data Cleaning")
     print(f"Starting with {len(df_clean)} records")
     
     # fix negative wind values
@@ -178,12 +123,11 @@ def clean_observations(df):
     df_clean['observation_id'] = range(1, len(df_clean) + 1)
     
     # summary
-    print(f"\n✓ Final dataset: {len(df_clean)} records")
+    print(f"Final dataset: {len(df_clean)} records")
     print(f"  Years: {df_clean['year'].min()} - {df_clean['year'].max()}")
     print(f"  Unique species: {df_clean['species_name'].nunique()}")
     print(f"  Unique transects: {df_clean['transect_name'].nunique()}")
     print(f"  Unique observers: {df_clean['observer_name'].nunique()}")
-    print("=====================\n")
     
     return df_clean
 
