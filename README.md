@@ -1,6 +1,6 @@
 # Birds Biodiversity Temporal Trends Analysis
 
-**Team Members:** [Add names and student IDs here]
+**Team Members:** Ollie, Kenichi, Sathya
 
 ## Project Overview
 Analysis of Martinique bird monitoring data (2012-2025) to quantify biodiversity temporal trends.
@@ -19,10 +19,8 @@ Download `Observations 2012-2025.xlsx` from Google Drive (link in team chat) and
 data/raw/Observations 2012-2025.xlsx
 ```
 
-### 3. Create Virtual Environment
+### 3. Install requiremnets (y'all can do it in venv if you want)
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 

@@ -13,10 +13,10 @@ ENV/
 .ipynb_checkpoints/
 *.ipynb_checkpoints
 # Data (don't commit large files)
-data/raw/*.xlsx
-data/raw/*.csv
-data/processed/*.csv
-*.pkl
+# data/raw/*.xlsx
+# data/raw/*.csv
+# data/processed/*.csv
+# *.pkl
 
 # IDE
 .vscode/
