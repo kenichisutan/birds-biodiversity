@@ -1,0 +1,33 @@
+Species Richness - Linear Trend Model Summary
+============================================================
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               richness   R-squared:                       0.390
+Model:                            OLS   Adj. R-squared:                  0.314
+Method:                 Least Squares   F-statistic:                     5.121
+Date:                Tue, 04 Nov 2025   Prob (F-statistic):             0.0535
+Time:                        15:07:21   Log-Likelihood:                -21.863
+No. Observations:                  10   AIC:                             47.73
+Df Residuals:                       8   BIC:                             48.33
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const            70.3000      0.762     92.308      0.000      68.544      72.056
+year_centered    -0.6000      0.265     -2.263      0.053      -1.211       0.011
+==============================================================================
+Omnibus:                        2.249   Durbin-Watson:                   2.527
+Prob(Omnibus):                  0.325   Jarque-Bera (JB):                1.067
+Skew:                           0.790   Prob(JB):                        0.587
+Kurtosis:                       2.747   Cond. No.                         2.87
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+Bootstrap Statistics:
+  Mean richness: 70.30
+  SD richness: 2.91
+  CI range: 59 - 75

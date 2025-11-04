@@ -118,6 +118,13 @@ def clean_observations(df):
     removed = before - len(df_clean)
     if removed > 0:
         print(f"Removed {removed} records with missing essential data")
+
+    # Convert year to integer
+    if 'year' in df_clean.columns:
+        try:
+            df_clean['year'] = df_clean['year'].astype(int)
+        except Exception as e:
+            print(f"⚠ Could not convert 'year' to int: {e}")
     
     # create observation ID
     df_clean['observation_id'] = range(1, len(df_clean) + 1)
