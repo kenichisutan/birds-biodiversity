@@ -1,0 +1,33 @@
+Shannon Diversity - Linear Trend Model Summary
+============================================================
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                shannon   R-squared:                       0.010
+Model:                            OLS   Adj. R-squared:                 -0.114
+Method:                 Least Squares   F-statistic:                   0.08145
+Date:                Tue, 04 Nov 2025   Prob (F-statistic):              0.783
+Time:                        15:41:08   Log-Likelihood:                 25.420
+No. Observations:                  10   AIC:                            -46.84
+Df Residuals:                       8   BIC:                            -46.23
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P>|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+const             3.0377      0.007    451.114      0.000       3.022       3.053
+year_centered     0.0007      0.002      0.285      0.783      -0.005       0.006
+==============================================================================
+Omnibus:                        0.810   Durbin-Watson:                   0.945
+Prob(Omnibus):                  0.667   Jarque-Bera (JB):                0.631
+Skew:                          -0.507   Prob(JB):                        0.729
+Kurtosis:                       2.303   Cond. No.                         2.87
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+Bootstrap Statistics:
+  Mean Shannon: 3.038
+  SD Shannon: 0.020
+  CI range: 2.956 - 3.097
