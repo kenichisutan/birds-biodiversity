@@ -7,7 +7,7 @@ Dep. Variable:                shannon   R-squared:                       0.010
 Model:                            OLS   Adj. R-squared:                 -0.114
 Method:                 Least Squares   F-statistic:                   0.08145
 Date:                Tue, 04 Nov 2025   Prob (F-statistic):              0.783
-Time:                        15:07:21   Log-Likelihood:                 25.420
+Time:                        15:41:08   Log-Likelihood:                 25.420
 No. Observations:                  10   AIC:                            -46.84
 Df Residuals:                       8   BIC:                            -46.23
 Df Model:                           1                                         

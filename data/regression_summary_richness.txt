@@ -7,7 +7,7 @@ Dep. Variable:               richness   R-squared:                       0.390
 Model:                            OLS   Adj. R-squared:                  0.314
 Method:                 Least Squares   F-statistic:                     5.121
 Date:                Tue, 04 Nov 2025   Prob (F-statistic):             0.0535
-Time:                        15:07:21   Log-Likelihood:                -21.863
+Time:                        15:41:08   Log-Likelihood:                -21.863
 No. Observations:                  10   AIC:                             47.73
 Df Residuals:                       8   BIC:                             48.33
 Df Model:                           1                                         
