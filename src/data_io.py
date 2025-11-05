@@ -155,3 +155,28 @@ def get_annual_summary(df):
     })
     
     return summary
+
+def calculate_shannon_diversity(df_year):
+    """
+    Calculate Shannon diversity index for a given year's data.
+    H' = -Σ(p_i * ln(p_i)), where p_i = proportion of individuals per species
+    """
+    # Get total count per species for this year
+    species_counts = df_year.groupby('species_name')['individual_count'].sum()
+    
+    # Calculate total individuals
+    total_individuals = species_counts.sum()
+    
+    if total_individuals == 0:
+        return np.nan
+    
+    # Calculate proportions
+    proportions = species_counts / total_individuals
+    
+    # Remove zero proportions (they don't contribute to Shannon)
+    proportions = proportions[proportions > 0]
+    
+    # Calculate Shannon index
+    shannon = -np.sum(proportions * np.log(proportions))
+    
+    return shannon
