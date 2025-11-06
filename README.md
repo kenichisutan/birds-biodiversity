@@ -1,6 +1,6 @@
 # Birds Biodiversity Temporal Trends Analysis
 
-**Team Members:** Ollie, Kenichi, Sathya
+**Team Members:** Oliver Wakeford, Kenichi Sutan, Sathya Gnanou
 
 ## Project Overview
 Analysis of Martinique bird monitoring data (2012-2025) to quantify biodiversity temporal trends.
@@ -13,27 +13,15 @@ git clone git@github.com:kenichisutan/birds-biodiversity.git
 cd birds-biodiversity
 ```
 
-### 2. Install requiremnets (y'all can do it in venv if you want)
+### 2. Install requiremnets (Can do it in virtual environment if you want)
 ```bash
 pip install -r requirements.txt
-```
-
-### 4. Verify requiremnts installed
-```bash
-python3 -c "import pandas; print('Setup successful!')"
-```
-
-### 5. Test everything:
-```
-python3 test_setup.py
-```
 
 ## Project Structure
 ```
 birds-biodiversity/
 ├── data/
 │   ├── raw/              # Original data
-│   └── processed/        # Cleaned data 
 ├── src/                  # Helper modules
 ├── notebooks/            # Analysis notebooks
 ├── figures/              # Exported figures
